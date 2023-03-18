@@ -52,7 +52,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 gem "devise"
-#gem "api_guard"
+gem "api_guard"
 gem "kaminari"
 
 group :development, :test do
