@@ -5,4 +5,8 @@ class User < ApplicationRecord
   def authenticate(password)
     valid_password?(password)
   end
+
+  def friendly_name
+    email.split('@').first
+  end
 end

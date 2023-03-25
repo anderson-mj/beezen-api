@@ -1,26 +1,28 @@
-<h2>Log in</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
+<% content_for :head do %>
+    <%= stylesheet_link_tag "new" %>
 <% end %>
+<div class= "container">
+  <% if alert || notice %>
+      <div class="alert alert-danger" role="alert">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p> 
+      </div>
+  <% end %>
+  <main class="form-signin">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <h1 class="h3 mb-3 fw-normal"><span class="text-orange">P</span>lease sign in</h1>
 
-<%= render "devise/shared/links" %>
+      <div class="form-floating">
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", id: "floatingInput", placeholder: "E-mail" %>
+        <label for="floatingInput">E-mail</label>
+      </div>
+      <div class="form-floating">
+        <%= f.password_field :password, class: "form-control", id: "floatingPassword", placeholder: "Password" %>
+        <label for="floatingPassword">Password</label>
+      </div>
+
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+    <% end %>
+  </main>
+</div>
