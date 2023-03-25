@@ -2,13 +2,8 @@
 <% content_for :head do %>
     <%= stylesheet_link_tag "new" %>
 <% end %>
+
 <div class= "container">
-  <% if alert || notice %>
-      <div class="alert alert-danger" role="alert">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p> 
-      </div>
-  <% end %>
   <main class="form-signin">
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <h1 class="h3 mb-3 fw-normal"><span class="text-orange">P</span>lease sign in</h1>
