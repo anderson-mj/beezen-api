@@ -1,4 +1,5 @@
 class Alert < ApplicationRecord
+    self.inheritance_column = nil # so we can use 'type' as a column name
     ALLOWED_TYPES = %w[portal_opened portal_closed]
 
     before_save :set_default_tag # needed this because of sqlite3
