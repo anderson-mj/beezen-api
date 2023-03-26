@@ -1,0 +1,74 @@
+
+<div class="container-fluid overflow-hidden">
+    <div class="row d-sm-none bg-dark p-3">
+        <%= button_to "Sign out" , destroy_user_session_path, class: "btn btn-danger float-right", method: :delete %>
+    </div>
+    <div class="row flex-nowrap">
+        <div class="col-sm-1 col-md-3 col-xl-2 px-sm-1 px-0 bg-dark d-none d-sm-inline">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none mx-auto-sm">
+                    <span class="fs-5 d-none d-md-inline"><span class="text-warning">B</span>eezen</span>
+                    <span class="fs-5 d-md-none text-warning">B</span>
+                </a>
+                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                    <li>
+                        <%= link_to root_path, class: "nav-link px-0 align-middle text-warning" do %>
+                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-md-inline">Dashboard</span>
+                        <% end %>
+                    </li>
+                    <li>
+                        <%= link_to alerts_path(type: "portal_opened"), class: "nav-link px-0 align-middle text-warning", method: :get do %>
+                            <!--<i class="fs-4 bi-speedometer2"></i> --> <span class="ms-1 d-none d-md-inline">Opened portals</span>
+                        <% end %>
+                    </li>
+                    <li>
+                        <%= link_to alerts_path(type: "portal_closed"), class: "nav-link px-0 align-middle text-warning", method: :get do %>
+                            <!--<i class="fs-4 bi-speedometer2"></i> --> <span class="ms-1 d-none d-md-inline">Closed portals</span>
+                        <% end %>
+                    </li>
+                </ul>
+                <div class="dropdown pb-4">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i width="30" height="30" class="bi-person"></i>
+                        <span class="d-none d-md-inline mx-1"><%= current_user.friendly_name %></span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                        <li><%= button_to "Sign out", destroy_user_session_path, class: "dropdown-item", method: :delete %></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+      <div class="col py-3 col-xs-1">
+        <%= column_chart @alerts.group_by_day(:created_at).count %>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Tag</th>
+                    <th>Origin</th>
+                    <th>Created at</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            <% if @paginated_alerts.any? %>
+                <% @paginated_alerts.each do |alert| %>
+                    <tr>
+                    <td><%= alert.type %></td>
+                    <td><%= alert.description %></td>
+                    <td><%= alert.tag %></td>
+                    <td><%= alert.origin %></td>
+                    <td><%= alert.created_at %></td>
+                    </tr>
+                <% end %> 
+          <% else %>
+              <tr>
+                  <td colspan="3">No alerts found</td>
+              </tr>
+          <% end %>
+            </tbody>
+        </table>
+        <%= paginate @paginated_alerts %>
+      </div>
+    </div>
+</div>
