@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   scope path: 'api' do
-    api_guard_routes for: 'users'
+    api_guard_routes for: 'users', only: [:authentication]
   end
   constraints subdomain: 'api' do
-    api_guard_routes for: 'users'
+    api_guard_routes for: 'users', only: [:authentication]
   end
   namespace :api do
     resources :alerts, only: [:index, :create]
