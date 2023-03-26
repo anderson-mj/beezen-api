@@ -52,7 +52,7 @@ gem "sassc-rails"
 # gem "image_processing", "~> 1.2"
 
 gem "devise"
-#gem "api_guard"
+gem "api_guard"
 gem "kaminari"
 gem "chartkick"
 gem "groupdate"
