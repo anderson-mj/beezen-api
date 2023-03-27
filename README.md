@@ -89,7 +89,6 @@ curl -X POST http://127.0.0.1:3000/api/alerts \
 
 ### Token refreshing
 POST request to /api/users/tokens with this headers:
-```
 * Authorization: Bearer #{INCLUDE Access-Token HERE}
 * Refresh-token: #{INCLUDE Refresh-token HERE}
 Example:
